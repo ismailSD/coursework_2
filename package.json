@@ -4,8 +4,8 @@
   "description": "Node console app",
   "main": "server.js",
   "scripts": {
-    "start": "server.js"
-    "build": "build",
+    "start": "node server.js",
+    "build": "coursework_2 build",
     "test": "node server.js"
 },
   "repository": {
