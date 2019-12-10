@@ -6,4 +6,4 @@ set +x
 
 echo 'The following "npm" command tests '
 set -x
-sudo npm test
+npm test
