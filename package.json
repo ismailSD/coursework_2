@@ -4,10 +4,10 @@
   "description": "Node console app",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
-    "build": "node-scripts build",
-    "test": "node server.js",
-    "eject": "node-scripts eject"
+    "start": "node server.js",
+    "build": "build",
+    "test": "node server.js"
+    
   },
   "repository": {
     "type": "git",
