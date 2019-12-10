@@ -6,9 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "build": "build",
-    "test": "node server.js",
-    "stop": "kill $(cat .pid)"
-  },
+    "test": "./test.js"      
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ismailSD/coursework_2.git"
@@ -18,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/ismailSD/coursework_2/issues"
   },
-  "homepage": "https://github.com/ismailSD/coursework_2#readme"
+  "homepage": "https://github.com/ismailSD/coursework_2#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2",
+    "request": "^2.88.0"
+  }
 }
