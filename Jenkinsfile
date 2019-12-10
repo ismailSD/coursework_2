@@ -23,7 +23,7 @@ pipeline {
             steps {
                 sh './deliver.sh'
                 input message: 'Fisnished using the server app? continue'
-                sh './kill.bash'
+                sh './kill.sh'
             }
         }
     } 
