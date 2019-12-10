@@ -20,5 +20,7 @@ www.listen(PORT,function () {
     startTime = new Date();;
     host = process.env.HOSTNAME;
     console.log (`Hello World Started At: ${startTime} | Running on port: ${PORT}, hostname: ${host}`);
+    console.log("exiting application..."); 
+    process.exit(1);
 });
 
