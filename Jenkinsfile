@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Test') { 
             steps {
-                sh './package.json' 
+                sh './test.sh' 
             }
         }
     }
