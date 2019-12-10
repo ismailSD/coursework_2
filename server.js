@@ -1,6 +1,7 @@
 var http = require('http');
 var requests=0;
 var podname= process.env.HOSTNAME;
+var PORT = process.env.PORT;
 var startTime;
 var host;
 
@@ -15,8 +16,9 @@ var handleRequest = function(request, response) {
 
 var www = http.createServer(handleRequest);
 
-www.listen(8080,function () {
+www.listen(PORT,function () {
     startTime = new Date();;
     host = process.env.HOSTNAME;
-    console.log ("Hello World Started At:",startTime, "| Running On: " ,host, "\n" );
+    console.log (`Hello World Started At: ${startTime} | Running on port: ${PORT}, hostname: ${host}`);
 });
+
