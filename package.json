@@ -1,1 +1,20 @@
-
+{
+  "name": "server.js",
+  "version": "1.0.0",
+  "description": "Node console app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ismailSD/coursework_2.git"
+  },
+  "author": "ismail adam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ismailSD/coursework_2/issues"
+  },
+  "homepage": "https://github.com/ismailSD/coursework_2#readme"
+}
