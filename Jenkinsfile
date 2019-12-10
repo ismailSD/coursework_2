@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Test') { 
             steps {
-                sh '/home/iadam200/coursework_2/test.sh' 
+                sh 'test.sh' 
             }
         }
     }
