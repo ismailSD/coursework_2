@@ -4,9 +4,9 @@
   "description": "Node console app",
   "main": "server.js",
   "scripts": {
+    "start": "server.js"
     "build": "build",
     "test": "node server.js"
-  }
 },
   "repository": {
     "type": "git",
