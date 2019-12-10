@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "build": "build",
-    "test": "node server.js"
+    "test": "node server.js",
     "stop": "kill $(cat .pid)"
   },
   "repository": {
