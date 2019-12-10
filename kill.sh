@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 echo 'The following command terminates the "npm start" process using its PID'
 set -x
-kill $'killall node'
+kill -9 `cat /var/run/myProcess.pid`
