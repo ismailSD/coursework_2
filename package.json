@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "build": "coursework_2 build",
-    "test": "node server.js"
-},
+    "test": "mocha"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ismailSD/coursework_2.git"
