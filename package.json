@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js"
     "build": "node-scripts build",
-    "test": "node-scripts test --env=jsdom",
+    "test": "node server.js",
     "eject": "node-scripts eject"
   },
   "repository": {
