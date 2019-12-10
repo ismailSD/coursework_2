@@ -1,13 +1,8 @@
 var assert = require('assert');
-var expect    = require("chai").expect;
-var request = require('request');
-var server = require('../server.js');
-
-describe('node hello world console app', function() {
+describe('Array', function() {
   describe('#indexOf()', function() {
-    it("returns status 200", function(done) {
-      expect(server.status).to.equal(200);
-      done();
+    it('should return -1 when the value is not present', function(){
+      assert.equal(-1, [1,2,3].indexOf(4));
     });
   });
 });
