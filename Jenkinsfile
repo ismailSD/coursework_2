@@ -15,7 +15,7 @@ pipeline {
             }
         }
         stage('SonarQube') {
-            agent{
+            agent any{
                 docker image 'maven:3-alpine'
             }
             environment {
