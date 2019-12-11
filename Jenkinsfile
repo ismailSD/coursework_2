@@ -21,9 +21,7 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh "${scannerHome}/bin/sonar-scanner 
-                       -Dsonar.projectKey=java-jenkins-sonar 
-                       -Dsonar.sources=. "
+                    sh "${scannerHome}/bin/sonar-scanner"
                 }
                 timeout(time: 10, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
