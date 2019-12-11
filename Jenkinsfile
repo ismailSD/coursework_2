@@ -16,7 +16,7 @@ pipeline {
         }
         stage('SonarQube') {
             steps {
-                sh "/home/coursework_2/sonar-server.properties"
+                sh "./sonar-server.properties"
                 timeout(time: 10, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }
