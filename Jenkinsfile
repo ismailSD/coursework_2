@@ -14,13 +14,14 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage('SonarQube Analysis') {
+        stage('SonarQube') {
+            
             environment {
                 scannerHome = tool 'SonarQubeScanner'
             }
             steps {
-               withSonarQubeEnv('sonarQube') {
-                    sh "/home/coursework_2/sonar-server.properties"
+                withSonarQubeEnv('sonarQube') {
+                    sh "${scannerHome}/bin/sonar-scanner"
                 }
                 timeout(time: 10, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
