@@ -14,6 +14,11 @@ pipeline {
                 sh 'npm install'
             }
         }
+        stage('SonarQube Scanner') {
+            steps {
+                sh '/home/coursework_2/sonar-server.properties'
+            }
+        }
         stage('Test') { 
             steps {
                 sh './test.sh' 
