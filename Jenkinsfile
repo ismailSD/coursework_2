@@ -20,7 +20,7 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh "${scannerHome}bin/sonar-scanner -Dsonar.projectKey=java-jenkins-sonar  -Dsonar.sources=."
+                    sh "/var/jenkins_home/sonarqube/sonar-scanner-3.3.0.1492-linux/bin/java"
                 }
                 timeout(time: 10, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
