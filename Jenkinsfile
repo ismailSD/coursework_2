@@ -16,10 +16,7 @@ pipeline {
         }
         stage('SonarQube') {
             agent{
-                docker {
-                image 'maven:3-alpine'
-                args '-p 3000:3000'
-            }
+                docker image 'maven:3-alpine'
             }
             environment {
                 scannerHome = tool 'SonarQubeScanner'
