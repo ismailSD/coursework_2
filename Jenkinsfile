@@ -14,9 +14,17 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage('SonarQube Scanner') {
+        stage('Sonarqube') {
+            environment {
+                scannerHome = tool 'SonarQubeScanner'
+            }
             steps {
-                sh '/home/coursework_2/sonar-server.properties'
+                withSonarQubeEnv('sonarqube') {
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }
+                timeout(time: 10, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
             }
         }
         stage('Test') { 
