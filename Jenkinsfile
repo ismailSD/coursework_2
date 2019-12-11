@@ -1,16 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
-            steps {
-                sh 'npm install'
-            }
-        }
-        stage('Test') { 
-            steps {
-                sh './test.sh' 
-            }
-        }
         stage('Sonar Analyse') {
         steps {
             nodejs(nodeJSInstallationName: 'NodeJSAuto', configId: '') {
@@ -23,12 +13,6 @@ pipeline {
             }
         }
     }
-        stage('Deliver') {
-            steps {
-                sh './deliver.sh'
-                input message: 'Fisnished using the server app? continue'
-                sh './kill.sh'
-            }
-        }
+     
     } 
 }
