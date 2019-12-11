@@ -15,10 +15,10 @@ pipeline {
             }
         }
         stage('SonarQube') {
-            steps {
-                environment {
+            environment {
                 scannerHome = tool 'SonarQubeScanner'
-             }
+            }
+            steps {
                  withSonarQubeEnv('SonarQube') {
                     sh "${scannerHome}/sonar-server.properties"
                 }
