@@ -15,9 +15,12 @@ pipeline {
             }
         }
         stage('SonarQube') {
+            environment {
+                scannerHome = tool 'SonarQubeScanner'
+            }
             steps {
-                 withSonarQubeEnv('SonarQube') {
-                    sh "/home/iadam200/coursework_2/sonar-server.properties"
+                withSonarQubeEnv('SonarQube') {
+                    sh "/var/jenkins_home/sonarqube/sonar-scanner-3.3.0.1492-linux/"
                 }
                 timeout(time: 10, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
