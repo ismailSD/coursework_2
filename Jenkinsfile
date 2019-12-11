@@ -15,16 +15,8 @@ pipeline {
             }
         }
         stage('SonarQube') {
-            agent any{
-                docker image 'maven:3-alpine'
-            }
-            environment {
-                scannerHome = tool 'SonarQubeScanner'
-            }
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh "${scannerHome}/bin/sonar-scanner"
-                }
+                sh "/home/coursework_2/sonar-server.properties"
                 timeout(time: 10, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }
