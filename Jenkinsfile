@@ -1,20 +1,43 @@
 pipeline {
-        agent none
-        stages {
-          stage("build & SonarQube analysis") {
-            agent any
-            steps {
-              withSonarQubeEnv('My SonarQube Server') {
-                sh 'mvn clean package sonar:sonar'
-              }
-            }
-          }
-          stage("Quality Gate") {
-            steps {
-              timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true
-              }
-            }
-          }
+    agent 
+    {
+        docker {
+            image 'node:12-alpine'
+            args '-p 3000:3000'
         }
-      }
+    }
+    environment {
+        CI = 'true' 
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Test') { 
+            steps {
+                sh './test.sh' 
+            }
+        }
+        stage('Sonar Analyse') {
+        steps {
+            nodejs(nodeJSInstallationName: 'NodeJSAuto', configId: '') {
+                script {
+                    withSonarQubeEnv('My server') {
+                    def scannerHome = tool 'sonarScanner';
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }
+            }
+            }
+        }
+    }
+        stage('Deliver') {
+            steps {
+                sh './deliver.sh'
+                input message: 'Fisnished using the server app? continue'
+                sh './kill.sh'
+            }
+        }
+    } 
+}
