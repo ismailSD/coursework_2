@@ -1,6 +1,5 @@
 pipeline {
-    agent 
-    {
+    agent {
         docker {
             image 'node:12-alpine'
             args '-p 3000:3000'
@@ -20,18 +19,6 @@ pipeline {
                 sh './test.sh' 
             }
         }
-        stage('Sonar Analyse') {
-        steps {
-            nodejs(nodeJSInstallationName: 'NodeJSAuto', configId: '') {
-                script {
-                    withSonarQubeEnv('My server') {
-                    def scannerHome = tool 'sonarScanner';
-                    sh "${scannerHome}/bin/sonar-scanner"
-                }
-            }
-            }
-        }
-    }
         stage('Deliver') {
             steps {
                 sh './deliver.sh'
