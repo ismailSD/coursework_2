@@ -5,7 +5,6 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "build": "coursework_2 build",
     "test": "mocha"
   },
   "repository": {
