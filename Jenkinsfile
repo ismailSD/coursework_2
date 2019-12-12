@@ -1,78 +1,37 @@
-pipeline {
-    agent {
-        docker {
-            image 'node:12-alpine'
-            args '-p 3000:3000'
+  
+node {
+    def app
+
+    stage('Clone repository') {
+        /* Let's make sure we have the repository cloned to our workspace */
+
+        checkout scm
+    }
+
+    stage('Build image') {
+        /* This builds the actual image; synonymous to
+         * docker build on the command line */
+
+        app = docker.build("getintodevops/hellonode")
+    }
+
+    stage('Test image') {
+        /* Ideally, we would run a test framework against our image.
+         * For this example, we're using a Volkswagen-type approach ;-) */
+
+        app.inside {
+            sh 'echo "Tests passed"'
         }
     }
-    environment {
-        CI = 'true'
-        
-        
-        registry = "iadam3136/coursework2_docker_repo"
-        registryCredential = 'dockerhub'
-        dockerImage = ''
+
+    stage('Push image') {
+        /* Finally, we'll push the image with two tags:
+         * First, the incremental build number from Jenkins
+         * Second, the 'latest' tag.
+         * Pushing multiple tags is cheap, as all the layers are reused. */
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
+        }
     }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'npm install'
-            }
-        }
-        
-        
-            stage('Cloning Git') {
-      steps {
-          git 'https://github.com/ismailSD/coursework_2.git'
-      }
-    }
-    stage('Building image') {
-      steps{
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
-        }
-      }
-    }
-    stage('Deploy Image') {
-      steps{
-        script {
-          docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-          }
-        }
-      }
-    }
-    stage('Remove Unused docker image') {
-      steps{
-        sh "docker rmi $registry:$BUILD_NUMBER"
-      }
-    }
-        
-        
-        stage('SonarQube') {
-            environment {
-                scannerHome = tool 'SonarQube'
-            }
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh "${scannerHome}/bin/sonar-scanner"
-                }
-                timeout(time: 10, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
-        stage('Test') { 
-            steps {
-                sh './test.sh' 
-            }
-        }
-        stage('Deliver') {
-            steps {
-                sh './deliver.sh'
-                input message: 'Fisnished using the server app? continue'
-                sh './kill.sh'
-            }
-        }
-    } 
 }
