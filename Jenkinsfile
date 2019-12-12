@@ -14,6 +14,12 @@ pipeline {
                 sh 'npm install'
             }
         }
+        stage('Build') {
+          steps {
+            sh 'docker build -f "Dockerfile-terraform" -t brightbox/terraform:latest .'
+            sh 'docker build -f "Dockerfile-cli" -t brightbox/cli:latest .'
+          }
+        }
         stage('SonarQube') {
             environment {
                 scannerHome = tool 'SonarQube'
