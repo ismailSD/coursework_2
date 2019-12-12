@@ -14,10 +14,14 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage('Build') {
-          steps {
-            sh 'docker build -f "Dockerfile-terraform" -t brightbox/terraform:latest .'
-            sh 'docker build -f "Dockerfile-cli" -t brightbox/cli:latest .'
+        
+        
+        stage('Building image') {
+            
+          steps{
+            script {
+              docker.build registry + ":$BUILD_NUMBER"
+            }
           }
         }
         stage('SonarQube') {
