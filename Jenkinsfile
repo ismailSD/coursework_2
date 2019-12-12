@@ -7,9 +7,6 @@ pipeline {
     }
     environment {
         CI = 'true'
-        registry = "gustavoapolinario/docker-test"
-        registryCredential = 'dockerhub'
-        dockerImage = ''
     }
     stages {
         stage('Build') {
@@ -17,36 +14,6 @@ pipeline {
                 sh 'npm install'
             }
         }
-        
-    stage('Cloning Git') {
-      steps {
-        git 'https://github.com/ismailSD/coursework_2.git'
-      }
-    }
-    stage('Building image') {
-      steps{
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
-        }
-      }
-    }
-    stage('Deploy Image') {
-      steps{
-        script {
-          docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-          }
-        }
-      }
-    }
-    stage('Remove Unused docker image') {
-      steps{
-        sh "docker rmi $registry:$BUILD_NUMBER"
-      }
-    }
-        
-        
-        
         stage('SonarQube') {
             environment {
                 scannerHome = tool 'SonarQube'
