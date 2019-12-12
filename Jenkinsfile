@@ -6,7 +6,10 @@ pipeline {
         }
     }
     environment {
-        CI = 'true' 
+        CI = 'true'
+        registry = "gustavoapolinario/docker-test"
+        registryCredential = 'dockerhub'
+        dockerImage = ''
     }
     stages {
         stage('Build') {
@@ -15,12 +18,6 @@ pipeline {
             }
         }
         
-        
-    environment {
-    registry = "gustavoapolinario/docker-test"
-    registryCredential = 'dockerhub'
-    dockerImage = ''
-  }
     stage('Cloning Git') {
       steps {
         git 'https://github.com/ismailSD/coursework_2.git'
