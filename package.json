@@ -12,6 +12,11 @@
     "type": "git",
     "url": "git+https://github.com/ismailSD/coursework_2.git"
   },
+  "keywords": [
+    "node",
+    "docker",
+    "dockerfile"
+  ],
   "author": "ismail adam",
   "license": "ISC",
   "bugs": {
