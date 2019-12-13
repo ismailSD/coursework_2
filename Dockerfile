@@ -3,7 +3,7 @@
 FROM node:7-onbuild
 
 # set maintainer
-LABEL maintainer "www.vvcs-fat@hotmail.co.uk"
+LABEL maintainer "www.iadisign.com"
 
 # set a health check
 HEALTHCHECK --interval=5s \
