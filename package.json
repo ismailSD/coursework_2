@@ -6,7 +6,6 @@
   "scripts": {
      "test": "node test.js",
     "start": "node server.js"
-    //"test": "mocha"
   },
   "repository": {
     "type": "git",
