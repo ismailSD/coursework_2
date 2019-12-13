@@ -6,6 +6,19 @@ node {
 
         checkout scm
     }
+    stage('SonarQube Analysis') {
+            environment {
+                scannerHome = tool 'SonarQube'
+            }
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }
+                timeout(time: 10, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
 
     stage('Build image') {
         /* This builds the actual image; synonymous to
